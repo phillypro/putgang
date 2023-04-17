@@ -427,7 +427,7 @@ button.fs-continue,
 
 .fs-fields .fs-radio-custom input[type="radio"]:checked + label {
     color: #ffffff;
-    background: red;
+    background: #c24ddf;
 }
 
 .fs-form-overview .fs-fields .fs-radio-custom input[type="radio"]:checked + label {
