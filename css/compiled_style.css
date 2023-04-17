@@ -5,6 +5,9 @@
 #page_footer {
   display: none;
 }
+.messaging-chat {
+display:none;
+}
 /* form css */
 .fs-form .fs-fields > li.skip {
   visibility: hidden;
