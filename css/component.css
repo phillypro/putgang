@@ -321,7 +321,7 @@ button.fs-continue,
 }
 
 .fs-form-overview .fs-fields input:focus {
-	background-color: #fff4f4; /* Fixes chrome bug with placeholder */
+	background-color: #faf4ff; /* Fixes chrome bug with placeholder */
 }
 
 .fs-form-overview .fs-fields input {
@@ -713,7 +713,7 @@ button.fs-continue {
 
 .fs-form-overview .fs-submit {
 	border-color: #232529;
-    color: #FF0000;
+    color: #A33CA7;
 }
 
 button.fs-continue {
