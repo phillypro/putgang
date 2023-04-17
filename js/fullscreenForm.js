@@ -766,11 +766,11 @@ Input Mask 6.0.7
         this.submitBtn.innerText = 'Working ...';
         this.submitBtn.disabled = true;   
 
-        await this._onGoHighLevelAdd(data);
+       // await this._onGoHighLevelAdd(data);
               
        // await this._onCloseIOAdd(data);
           
-       // await this._onKlaviyoAdd(data);
+        await this._onKlaviyoAdd(data);
          
         this.done();
       
