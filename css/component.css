@@ -293,7 +293,7 @@ button.fs-continue,
 	border: none;
 	border-bottom: 2px solid rgba(0,0,0,0.2);
 	background-color: transparent;
-    color: #F00000;
+    color: #b141b5;
 	text-overflow: ellipsis;
 	font-weight: bold;
 	font-size: 1.5em;
@@ -440,7 +440,7 @@ button.fs-continue,
 	height: 200px;
 	border: 2px solid rgba(0,0,0,0.2);
 	background-color: transparent;
-    color: #F00000;
+    color: #b141b5;
 	font-weight: 700;
 	font-size: 0.85em;
 	resize: none;
@@ -580,7 +580,7 @@ button.fs-continue,
 
 .fs-nav-dots button:hover::before,
 .fs-nav-dots button.fs-dot-current::before {
-	background: #F00000;
+	background: #b141b5;
 }
 
 /* Progress bar */
@@ -589,7 +589,7 @@ button.fs-continue,
 	top: 0;
 	width: 0%;
 	height: 0.5em;
-    background:#F00000;
+    background:#b141b5;
 	-webkit-transition: width 0.3s ease-in-out;
 	transition: width 0.3s ease-in-out;
 }
@@ -702,7 +702,7 @@ button.fs-continue {
 	border: 3px solid #232529;
 	border-radius: 40px;
 	font-weight: 700;
-    color: rgba(255, 0, 0, 1);
+    color: rgba(177, 65, 181, 1);
 }
 
 .fs-form-overview .fs-submit,
