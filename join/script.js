@@ -2743,6 +2743,7 @@ function loadjscssfile(filename, filetype){
 
 loadjscssfile("https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css", "css") 
 loadjscssfile("https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css", "css") 
+loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main8/join/style.css", "css") 
 
 
 /**
