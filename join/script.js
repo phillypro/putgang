@@ -17,7 +17,7 @@ const markup = `<div class="top-section">
   <div class="youtube-video video-box">
       <div class="youtube-container">
          <a data-fancybox href="https://www.youtube.com/embed/aJyxivG8fgk?enablejsapi=1&amp;autoplay=0">
-          <video loop muted playsinline autoplay> <source src="images/sample.mp4" type="video/mp4"></video>
+          <video loop muted playsinline autoplay> <source src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/sample.mp4" type="video/mp4"></video>
          </a>
       </div>
   </div>
@@ -2645,7 +2645,7 @@ const markup = `<div class="top-section">
           </div>
           <div class="image-wrap">
            <div class="image-inner" href="#">
-            <span class="img"><img src="images/chart-min2.gif"  /></span>
+            <span class="img"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/chart-min2.gif"  /></span>
             <span class="block"></span>
            </div>
           </div>
@@ -2673,7 +2673,7 @@ const markup = `<div class="top-section">
           </div>
           <div class="image-wrap">
            <a data-fancybox class="image-inner" href="https://www.youtube.com/watch?v=Ap7qvDQ87i4">
-            <span class="img"><img src="images/lordlynda-min.gif"  /></span>
+            <span class="img"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/lordlynda-min.gif"  /></span>
             <span class="block"></span>
             </a>
           </div>
@@ -2699,28 +2699,16 @@ const markup = `<div class="top-section">
           <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide"><img src="images/dm_1.jpg" /></div>
-            <div class="swiper-slide"><img src="images/dm_2.jpg" /></div>
-            <div class="swiper-slide"><img src="images/dm_3.jpg" /></div>
-            <div class="swiper-slide"><img src="images/dm_4.jpg" /></div>
+            <div class="swiper-slide"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/dm_1.jpg" /></div>
+            <div class="swiper-slide"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/dm_2.jpg" /></div>
+            <div class="swiper-slide"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/dm_3.jpg" /></div>
+            <div class="swiper-slide"><img src="https://cdn.jsdelivr.net/gh/phillypro/putgang@main/join/images/dm_4.jpg" /></div>
           </div>
         </div>
         </div>
   </div>
  </div>
-</div>
-<script>
-  var swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 0,
-    loop: true,
-    speed:700,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-  });
- </script>`;
+</div>`;
 
 // add markup 
 pageContainer.innerHTML = markup;
@@ -2743,6 +2731,7 @@ function loadjscssfile(filename, filetype){
 
 loadjscssfile("https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css", "css") 
 loadjscssfile("https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css", "css") 
+loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main12/join/style.css", "css") 
 
 
 /**
@@ -2764,3 +2753,41 @@ loadjscssfile("https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css", "cs
 Fancybox.bind('[data-fancybox]', {
     //
   });    
+
+  function waitForElm(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+waitForElm('.swiper').then((elm) => {
+    var swiper = new Swiper(".swiper", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        speed:700,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+      });
+});
+
+ 
+
+
+}
