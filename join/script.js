@@ -2711,7 +2711,7 @@ const markup = `<div class="top-section">
 </div>`;
 
 // add markup 
-pageContainer.innerHTML = markup;
+//pageContainer.innerHTML = markup;
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
@@ -2731,7 +2731,8 @@ function loadjscssfile(filename, filetype){
 
 loadjscssfile("https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css", "css") 
 loadjscssfile("https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css", "css") 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main12/join/style.css", "css") 
+loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main15/join/style.css", "css") 
+
 
 
 /**
@@ -2786,8 +2787,14 @@ waitForElm('.swiper').then((elm) => {
         },
       });
 });
+waitForElm('#page_header').then((elm) => {
+    var pageHeader = document.querySelectorAll('#page_header');
+    var fakeLink = document.createElement('a');
+    fakeLink.classList.add('linkCover');
+    fakeLink.href="https://www.putgang.com/join";
+    pageHeader[0].insertBefore(fakeLink,pageHeader.firstChild);
+});
 
- 
 
 
 }
