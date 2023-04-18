@@ -26,6 +26,17 @@
   font-style: normal;
   font-display: swap;
 }
+.linkCover {
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  left: 0px;
+  width: 35%;
+  max-width: 178px;
+  z-index: 9;
+  display: block;
+}
+
 #page_header section > div {
   max-width: 1360px;
   width: 100%;
