@@ -896,6 +896,7 @@ Input Mask 6.0.7
             customFields.push(key);
           });
           
+	  formData['Current Member'] = 'No';
           formData['$source'] = "Put Gang Meeting";
           
           formData['$fields'] = customFields.toString();
