@@ -113,6 +113,9 @@
 .top-section .inner2 .google-review-info span {
   font-weight: 700;
 }
+.top-section .inner2 .google-stars {
+  line-height: 0;
+}
 .top-section .inner2 .google-stars svg {
   max-width: 90px;
 }
