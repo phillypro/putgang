@@ -4,13 +4,37 @@ var pageTitle = document.title;
 
 
 var body = document.body;
-if (pageTitle =="Join") {
+
+var isHome;
+var isJoin;
+switch(pageTitle) {
+    case 'Put Gang - Stock Options':
+      isHome = true;
+      break;
+    case 'Join':
+        isJoin = true;
+      break;
+    default:
+  }
+
+if (isJoin || isHome ) {
   body.classList.add("template-join","js");
 
 
 // add html to pageContgainer
 var pageContainer = document.querySelector('#page_section_container');
 
+if(isJoin) {
+var checkout = {
+    link: 'https://www.putgang.com/meeting'
+}
+console.log('join');
+}
+if(isHome) {
+    var checkout = {
+        link: 'https://www.putgang.com/put-gang/34274/monthly/buy'
+    }   
+}
 // create html markup 
 const markup = `<div class="top-section">
 <div class="inner">
@@ -30,7 +54,7 @@ const markup = `<div class="top-section">
       </ul>
       <div class="button-wrapper">
           <div class="get-started-button">
-              <a class="get-started-link" href="https://www.putgang.com/meeting">Learn More</a>
+              <a class="get-started-link" href="${checkout.link}">Learn More</a>
           </div>
       </div>
   </div>
@@ -2639,7 +2663,7 @@ const markup = `<div class="top-section">
               </span>
               <h2>Learn & Win</h2>
               Follow along with an expert on video and make money with him 
-              <a class="learn-more-link" href="https://www.putgang.com/meeting">Learn more <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+              <a class="learn-more-link" href="${checkout.link}">Learn more <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.61681 0.646353L7.48861 1.77456L13.9154 8.2014L0.797241 8.20276L0.797821 9.79792L13.9182 9.79666L7.48616 16.2287L8.61402 17.3565L16.9705 9.00005L8.61681 0.646353Z" fill="#1E47F6"/>
                   </svg></a>
           </div>
@@ -2689,7 +2713,7 @@ const markup = `<div class="top-section">
       <div>Here’s what people have been saying</div>
       <div class="button-wrapper">
           <div class="gain-access-button">
-              <a class="get-started-link" href="https://www.putgang.com/meeting" data-external-link-checked="true" target="_blank">Gain Access</a>
+              <a class="get-started-link" href="${checkout.link}" data-external-link-checked="true" target="_blank">Gain Access</a>
           </div>
       </div>
   </div>
@@ -2787,6 +2811,8 @@ waitForElm('.swiper').then((elm) => {
         },
       });
 });
+
+if(isJoin) {
 waitForElm('#page_header').then((elm) => {
     var pageHeader = document.querySelectorAll('#page_header');
     var fakeLink = document.createElement('a');
@@ -2801,7 +2827,7 @@ waitForElm('#page_header').then((elm) => {
     fakeHeader.appendChild(fakeHeaderInner);
     pageHeader[0].insertBefore(fakeHeader,pageHeader.firstChild);
 });
-
+}
 
 
 }
