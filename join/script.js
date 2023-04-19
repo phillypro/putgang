@@ -2711,7 +2711,7 @@ const markup = `<div class="top-section">
 </div>`;
 
 // add markup 
-//pageContainer.innerHTML = markup;
+pageContainer.innerHTML = markup;
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
