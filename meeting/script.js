@@ -191,6 +191,6 @@ function loadjscssfile(filename, filetype){
 
 loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main30/js/fullscreenForm.js", "js") 
 loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main6/css/component.css", "css") 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main7/css/compiled_style.css", "css") 
+loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main7/css/compiled_style.css", "css")  
 
 }
