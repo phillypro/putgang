@@ -872,7 +872,7 @@ Input Mask 6.0.7
          
           var formData = {
             email: data['email'],
-            $phone_number: data['phone'],
+            phone_number: data['phone'],
             sms_consent: true,
           };
           
