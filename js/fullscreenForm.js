@@ -899,7 +899,6 @@ Input Mask 6.0.7
 	  formData['Current Member'] = 'No';
           formData['$source'] = "Put Gang Meeting";
           
-          formData['$fields'] = customFields.toString();
           console.log(formData); console.log('new success');
 		
 	const options = {
