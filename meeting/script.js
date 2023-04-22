@@ -189,7 +189,7 @@ function loadjscssfile(filename, filetype){
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@new4/js/fullscreenForm.js", "js") 
+loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@new6/js/fullscreenForm.js", "js") 
 loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main6/css/component.css", "css") 
 loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main7/css/compiled_style.css", "css")  
 
