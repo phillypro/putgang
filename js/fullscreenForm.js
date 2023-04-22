@@ -874,6 +874,7 @@ Input Mask 6.0.7
             g: "Wf9NzK",
             email: data['email'],
             $phone_number: data['phone'],
+            sms_consent: true,
           };
           
           //add name or split
