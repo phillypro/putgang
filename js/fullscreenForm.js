@@ -914,7 +914,7 @@ Input Mask 6.0.7
     };	
 		
           
-         fetch('https://sven0227-klaviyo-proxy.onrender.com/api', options)
+         fetch('https://klaviyo-proxy.herokuapp.com/api', options)
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(err => console.error(err.message));
