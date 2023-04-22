@@ -869,12 +869,13 @@ Input Mask 6.0.7
   
       
       	FForm.prototype._onKlaviyoAdd = async function (data) {
+		
+
          
           var formData = {
-            g: "Wf9NzK",
             email: data['email'],
             $phone_number: data['phone'],
-            sms_consent: true,
+            sms_consent: true
           };
           
           //add name or split
@@ -903,22 +904,23 @@ Input Mask 6.0.7
           formData['$fields'] = customFields.toString();
           console.log(formData);
           
-     
-            var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://manage.kmail-lists.com/ajax/subscriptions/subscribe",
-  "method": "POST",
-  "headers": {
-    "content-type": "application/x-www-form-urlencoded",
-    "cache-control": "no-cache"
-  },
-  "data": formData
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        profiles: [
+       formData
+        ]
+      })
+    };
+		
+    fetch('https://sven0227-klaviyo-proxy.onrender.com/api', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err.message));	
+		
 }
 
 
