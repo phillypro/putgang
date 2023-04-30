@@ -875,12 +875,12 @@ Input Mask 6.0.7
 		 var memberEmail =	new URLSearchParams(window.location.search).get('email');
 
           var formData = {
-            email: (data['email'] ? data['email'] : memberEmail),
+            email: (data['email'] ? data['email'] : memberEmail)
           };
 
 		  if(data['phone']) {
 		  formData['phone_number'] = '+1' + data['phone'].replace(/\D/g, '');
-		  formData['sms_content'] = true;
+		  formData['sms_consent'] = true;
 		  }
           
           //add name or split
