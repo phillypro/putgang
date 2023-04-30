@@ -12,7 +12,7 @@ if (pageTitle =="Meeting" || pageTitle == "Onboarding") {
       fileHost = '';
       break;
     case 'www.putgang.com':
-      fileHost = 'https://cdn.jsdelivr.net/gh/phillypro/putgang@master/';
+      fileHost = 'https://cdn.jsdelivr.net/gh/phillypro/putgang@latest/';
       break;
     default:
   }
