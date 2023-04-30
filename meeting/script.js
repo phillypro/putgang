@@ -4,13 +4,110 @@ var pageTitle = document.title;
 
 
 var body = document.body;
-if (pageTitle =="Meeting") {
+if (pageTitle =="Meeting" || pageTitle == "Onboarding") {
   body.classList.add("template-meeting","js");
+
+  switch(window.location.host) {
+    case '127.0.0.1:5500':
+      fileHost = '';
+      break;
+    case 'www.putgang.com':
+      fileHost = 'https://cdn.jsdelivr.net/gh/phillypro/putgang@main/';
+      break;
+    default:
+  }
 
 
 // add html to pageContgainer
 var pageContainer = document.querySelector('#page_section_container');
 
+
+
+const blocks = { 
+  name:`<li id="block-1" class="fs-current"  data-field-id="name">
+<label priority="header-high" class="fs-field-label fs-anim-upper" for="af-Form-q1">We accept a <span style="color:purple;">limit of 25</span> new members each quarter and focus on helping them achieve financial freedom. Before we get started, what's your name?<span class="required">*</span></label>
+  <input class="fs-anim-lower" tabindex="1" id="af-Form-q1" name="af-Form-q1" type="text" required/>
+</li>`,
+email: `<li id="block-2" class=" email " data-field-id="email">
+<label priority="footer-high" class="fs-field-label fs-anim-upper" for="af-Form-q2">Hi <answer data-id="block-1"></answer>, What's the best email to reach you?<span class="required">*</span></label>
+  <input class="fs-anim-lower" tabindex="2" id="af-Form-q2" name="af-Form-q2" type="email" required="">
+</li>`,
+phone: `<li id="block-3" class=" phone " data-field-id="phone">
+<label priority="footer-mid" class="fs-field-label fs-anim-upper" for="af-Form-q3">Cool, also what's your Phone Number?<span class="required">*</span></label>
+  <input class="fs-anim-lower" tabindex="3" id="af-Form-q3" name="af-Form-q3" type="tel" required="">
+</li>`,
+goals: `<li id="block-4" class="radio-form" data-field-id="Trading goals" data-input-trigger>
+<label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q4">What's your goal with options trading?<span class="required">*</span></label>
+<div class="fs-radio-group fs-radio-custom smallbuttons clearfix fs-anim-lower onerow">
+  <span><input tabindex="4" id="af-Form-q4a" name="af-Form-q4" type="radio" value="i just want to learn" required /><label class="small" for="af-Form-q4a">i just want to learn</label></span>
+  <span><input tabindex="5" id="af-Form-q4b" name="af-Form-q4" type="radio" value="i need to make money fast" required /><label class="small" for="af-Form-q4b">i need to make money fast</label></span>
+  <span><input tabindex="6" id="af-Form-q4c" name="af-Form-q4" type="radio" value="i want to eventually do this full-time" required /><label class="small" for="af-Form-q4c">i want to eventually do this full-time</label></span>
+</div>  
+</li>`,
+value: `<li id="block-5" class="radio-form" data-field-id="Do you have 10k" data-input-trigger>
+<label priority="body-high" class="fs-field-label fs-anim-upper" for="af-Form-q5">After we teach you how to win with any amount, will you have access to $10,000 or more to trade with?<span class="required">*</span></label>
+  <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
+    <span><input tabindex="7" id="af-Form-q5a" name="af-Form-q5" type="radio" value="Yes" required /><label class="small" for="af-Form-q5a">Yes</label></span>
+    <span><input tabindex="8" id="af-Form-q5b" name="af-Form-q5" type="radio" value="Not at the moment" required /><label class="small" for="af-Form-q5b">Not at the moment</label></span>
+</div>  
+</li>`,
+funding: `<li id="block-6" class="radio-form" data-field-id="Do you want funding" data-input-trigger>
+<label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q6">Would you be interested in Funding that could help you invest more and make more profit faster?<span class="required">*</span></label>
+  <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
+    <span><input tabindex="9" id="af-Form-q6a" name="af-Form-q6" type="radio" value="Very interested" required /><label class="small" for="af-Form-q6a">Very interested</label></span>
+    <span><input tabindex="10" id="af-Form-q6b" name="af-Form-q6" type="radio" value="Not interested" required /><label class="small" for="af-Form-q6b">Not interested</label></span>
+</div>  
+</li>`,
+availability: `<li id="block-7" class="radio-form" data-field-id="Available for Live trading" data-input-trigger>
+<label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q7">Are you available to listen in on a live call at least once a week between 9am and 11am est?<span class="required">*</span></label>
+  <div class="fs-radio-group fs-radio-custom smallbuttons clearfix fs-anim-lower onerow">
+    <span><input tabindex="11" id="af-Form-q7a" name="af-Form-q7" type="radio" value="That's easy" required /><label class="small" for="af-Form-q7a">That's easy</label></span>
+    <span><input tabindex="12" id="af-Form-q7b" name="af-Form-q7" type="radio" value="I'm willing to try" required /><label class="small" for="af-Form-q7b">I'm willing to try</label></span>
+    <span><input tabindex="13" id="af-Form-q7c" name="af-Form-q7" type="radio" value="That's not possible" required /><label class="small" for="af-Form-q7c">That's not possible</label></span>
+</div>  
+</li>`
+}
+var questions = '';
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const email = urlParams.get('email')
+
+switch(pageTitle) {
+  case 'Meeting':
+    questions = blocks.name + blocks.email + blocks.phone + blocks.goals + blocks.value + blocks.funding + blocks.availability;
+    addMarkup(fixFields(questions));
+    break;
+  case 'Onboarding':
+        if(email) {
+          // lets find them
+         // check if email attached and if not...ask for it
+        // console.log(findUser(email));
+         findUser(email).then(function(memberId) {
+          if(memberId) {
+          getProfile(memberId).then(function(profile) {
+            if(!profile.$phone_number) {
+              questions += blocks.phone;
+            }
+            questions += blocks.goals + blocks.value + blocks.funding + blocks.availability;
+            addMarkup(fixFields(questions));
+          })
+          }else{
+
+            questions = blocks.phone + blocks.goals + blocks.value + blocks.funding + blocks.availability;
+          }
+          addMarkup(fixFields(questions));
+        });
+          
+        }else{
+         
+          addMarkup(fixFields(questions));
+        }
+    break;
+  default:
+}
+
+
+function addMarkup(questions) { 
 // create html markup 
 const markup = `<div class="fs-container">
   <div class="fs-form-wrap" id="fs-form-wrap">
@@ -64,66 +161,12 @@ const markup = `<div class="fs-container">
         </g>
         </svg>        
 </a>  
-
 				</div>
 				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
                        
-       <ol class="fs-fields">
-
-                        <li id="block-1" class="fs-current"  data-field-id="name">
-                            <label priority="header-high" class="fs-field-label fs-anim-upper" for="af-Form-q1">We accept a <span style="color:purple;">limit of 25</span> new members each quarter and focus on helping them achieve financial freedom. Before we get started, what's your name?<span class="required">*</span></label>
-                              <input class="fs-anim-lower" tabindex="1" id="af-Form-q1" name="af-Form-q1" type="text" required/>
-                          </li>  
-
-                          <li id="block-2" class=" email " data-field-id="email">
-                            <label priority="footer-high" class="fs-field-label fs-anim-upper" for="af-Form-q2">Hi <answer data-id="block-1"></answer>, What's the best email to reach you?<span class="required">*</span></label>
-                              <input class="fs-anim-lower" tabindex="2" id="af-Form-q2" name="af-Form-q2" type="email" required="">
-                          </li>
-
-                          <li id="block-3" class=" phone " data-field-id="phone">
-                            <label priority="footer-mid" class="fs-field-label fs-anim-upper" for="af-Form-q3">Cool, also what's your Phone Number?<span class="required">*</span></label>
-                              <input class="fs-anim-lower" tabindex="3" id="af-Form-q3" name="af-Form-q3" type="tel" required="">
-                          </li>
-
-                          <li id="block-4" class="radio-form" data-field-id="Trading goals" data-input-trigger>
-                          <label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q4">What's your goal with options trading?<span class="required">*</span></label>
-                            <div class="fs-radio-group fs-radio-custom smallbuttons clearfix fs-anim-lower onerow">
-                              <span><input tabindex="4" id="af-Form-q4a" name="af-Form-q4" type="radio" value="i just want to learn" required /><label class="small" for="af-Form-q4a">i just want to learn</label></span>
-                              <span><input tabindex="5" id="af-Form-q4b" name="af-Form-q4" type="radio" value="i need to make money fast" required /><label class="small" for="af-Form-q4b">i need to make money fast</label></span>
-                              <span><input tabindex="6" id="af-Form-q4c" name="af-Form-q4" type="radio" value="i want to eventually do this full-time" required /><label class="small" for="af-Form-q4c">i want to eventually do this full-time</label></span>
-                          </div>  
-                        </li>
-
-                        <li id="block-5" class="radio-form" data-field-id="Do you have 10k" data-input-trigger>
-                            <label priority="body-high" class="fs-field-label fs-anim-upper" for="af-Form-q5">After we teach you how to win with any amount, will you have access to $10,000 or more to trade with?<span class="required">*</span></label>
-                              <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
-                                <span><input tabindex="7" id="af-Form-q5a" name="af-Form-q5" type="radio" value="Yes" required /><label class="small" for="af-Form-q5a">Yes</label></span>
-                                <span><input tabindex="8" id="af-Form-q5b" name="af-Form-q5" type="radio" value="Not at the moment" required /><label class="small" for="af-Form-q5b">Not at the moment</label></span>
-                            </div>  
-                          </li>
-
-                          <li id="block-6" class="radio-form" data-field-id="Do you want funding" data-input-trigger>
-                            <label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q6">Would you be interested in Funding that could help you invest more and make more profit faster?<span class="required">*</span></label>
-                              <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
-                                <span><input tabindex="9" id="af-Form-q6a" name="af-Form-q6" type="radio" value="Very interested" required /><label class="small" for="af-Form-q6a">Very interested</label></span>
-                                <span><input tabindex="10" id="af-Form-q6b" name="af-Form-q6" type="radio" value="Not interested" required /><label class="small" for="af-Form-q6b">Not interested</label></span>
-                            </div>  
-                          </li>
-
-                          <li id="block-7" class="radio-form" data-field-id="Available for Live trading" data-input-trigger>
-                            <label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q7">Are you available to listen in on a live call at least once a week between 9am and 11am est?<span class="required">*</span></label>
-                              <div class="fs-radio-group fs-radio-custom smallbuttons clearfix fs-anim-lower onerow">
-                                <span><input tabindex="11" id="af-Form-q7a" name="af-Form-q7" type="radio" value="That's easy" required /><label class="small" for="af-Form-q7a">That's easy</label></span>
-                                <span><input tabindex="12" id="af-Form-q7b" name="af-Form-q7" type="radio" value="I'm willing to try" required /><label class="small" for="af-Form-q7b">I'm willing to try</label></span>
-                                <span><input tabindex="13" id="af-Form-q7c" name="af-Form-q7" type="radio" value="That's not possible" required /><label class="small" for="af-Form-q7c">That's not possible</label></span>
-                            </div>  
-                          </li>
-  
-
+       <ol class="fs-fields"> 
+       ${questions}
                     </ol>
-
-
-
 					<button class="fs-submit" type="submit">Give me Access</button>
 				</form><!-- /fs-form -->
 			</div><!-- /fs-form-wrap -->
@@ -163,15 +206,79 @@ const markup = `<div class="fs-container">
 
 // add markup 
 pageContainer.innerHTML = markup;
+loadjscssfile(fileHost + "js/fullscreenForm.js", "js") 
+}
 
 
 
 
 
+var support = (function () {
+	if (!window.DOMParser) return false;
+	var parser = new DOMParser();
+	try {
+		parser.parseFromString('x', 'text/html');
+	} catch(err) {
+		return false;
+	}
+	return true;
+})();
 
+function stringToHTML(str) {
 
+	// If DOMParser is supported, use it
+	if (support) {
+		var parser = new DOMParser();
+		var doc = parser.parseFromString(str, 'text/html');
+		return doc.body;
+	}
 
+	// Otherwise, fallback to old-school method
+	var dom = document.createElement('div');
+	dom.innerHTML = str;
+	return dom;
 
+};
+
+function fixFields(Fields) {
+  var questionsHTML = stringToHTML(Fields);
+  questionsHTML.firstChild.classList.add('fs-current');
+  return questionsHTML.innerHTML;
+}
+
+// Find Klaviyo user function
+function findUser(email) {
+  var theData = {
+          email: email
+  } 
+const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(theData)
+  };	
+  
+     return fetch('https://klaviyo-proxy.herokuapp.com/find', options)
+       .then(response => response.json())
+       .catch(err => console.error(err.message));
+ 
+}
+
+// Find Klaviyo user function
+function getProfile(memberId) {
+const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };	
+  
+     return fetch('https://klaviyo-proxy.herokuapp.com/profile?member=' + memberId, options)
+    .then(response => response.json())
+    .catch(err => console.error(err.message));
+ 
+}
 
 function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
@@ -189,8 +296,9 @@ function loadjscssfile(filename, filetype){
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@final1/js/fullscreenForm.js", "js") 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main6/css/component.css", "css") 
-loadjscssfile("https://cdn.jsdelivr.net/gh/phillypro/putgang@main7/css/compiled_style.css", "css")  
+
+
+loadjscssfile(fileHost + "css/component.css", "css") 
+loadjscssfile(fileHost + "css/compiled_style.css", "css")  
 
 }
