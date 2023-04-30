@@ -905,10 +905,10 @@ Input Mask 6.0.7
             customFields.push(key);
           });
           if(memberEmail) {
-			formData['Current Member'] = 'Yes';
+			formData['Current Member'] = true;
 			formData['$source'] = "Onboarding";
 		  }else{
-	      formData['Current Member'] = 'No';
+	      formData['Current Member'] = false;
           formData['$source'] = "Meeting";
 		  }
           
