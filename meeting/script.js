@@ -47,15 +47,15 @@ goals: `<li id="block-4" class="radio-form" data-field-id="Trading goals" data-i
 value: `<li id="block-5" class="radio-form" data-field-id="Do you have 10k" data-input-trigger>
 <label priority="body-high" class="fs-field-label fs-anim-upper" for="af-Form-q5">After we teach you how to win with any amount, will you have access to $10,000 or more to trade with?<span class="required">*</span></label>
   <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
-    <span><input tabindex="7" id="af-Form-q5a" name="af-Form-q5" type="radio" value="Yes" required /><label class="small" for="af-Form-q5a">Yes</label></span>
-    <span><input tabindex="8" id="af-Form-q5b" name="af-Form-q5" type="radio" value="Not at the moment" required /><label class="small" for="af-Form-q5b">Not at the moment</label></span>
+    <span><input tabindex="7" id="af-Form-q5a" name="af-Form-q5" type="radio" value="true" required /><label class="small" for="af-Form-q5a">Yes</label></span>
+    <span><input tabindex="8" id="af-Form-q5b" name="af-Form-q5" type="radio" value="false" required /><label class="small" for="af-Form-q5b">Not at the moment</label></span>
 </div>  
 </li>`,
 funding: `<li id="block-6" class="radio-form" data-field-id="Do you want funding" data-input-trigger>
 <label priority="body-mid" class="fs-field-label fs-anim-upper" for="af-Form-q6">Would you be interested in Funding that could help you invest more and make more profit faster?<span class="required">*</span></label>
   <div class="fs-radio-group fs-radio-custom bigbuttons clearfix fs-anim-lower onerow">
-    <span><input tabindex="9" id="af-Form-q6a" name="af-Form-q6" type="radio" value="Very interested" required /><label class="small" for="af-Form-q6a">Very interested</label></span>
-    <span><input tabindex="10" id="af-Form-q6b" name="af-Form-q6" type="radio" value="Not interested" required /><label class="small" for="af-Form-q6b">Not interested</label></span>
+    <span><input tabindex="9" id="af-Form-q6a" name="af-Form-q6" type="radio" value="true" required /><label class="small" for="af-Form-q6a">Very interested</label></span>
+    <span><input tabindex="10" id="af-Form-q6b" name="af-Form-q6" type="radio" value="false" required /><label class="small" for="af-Form-q6b">Not interested</label></span>
 </div>  
 </li>`,
 availability: `<li id="block-7" class="radio-form" data-field-id="Available for Live trading" data-input-trigger>
