@@ -376,7 +376,6 @@ Input Mask 6.0.7
                  var variable =  answerblock.dataset.id;
                    var formValue = [];
                 this.fields.forEach(function (field, index) {
-                  console.log(variable + ' == ' + field.id);
                   if(variable == field.id) {
                    switch(field.querySelector('[name]').type) { 
                    case 'radio':
@@ -770,7 +769,10 @@ Input Mask 6.0.7
               
        // await this._onCloseIOAdd(data);
           
-        await this._onKlaviyoAdd(data);
+      await this._onKlaviyoAdd(data);
+
+	//	await this._onCCAdd(data);
+
          
         this.done();
       
@@ -870,20 +872,27 @@ Input Mask 6.0.7
       
       	FForm.prototype._onKlaviyoAdd = async function (data) {
          
+		 var memberEmail =	new URLSearchParams(window.location.search).get('email');
+
           var formData = {
-            email: data['email'],
-            phone_number: '+1' + data['phone'].replace(/\D/g, ''),
-            sms_consent: true,
+            email: (data['email'] ? data['email'] : memberEmail)
           };
+
+		  if(data['phone']) {
+		  formData['phone_number'] = '+1' + data['phone'].replace(/\D/g, '');
+		  formData['sms_consent'] = true;
+		  }
           
           //add name or split
+		  if(data['name']) {
           var clientName = data['name'].split(" ");
-          if  ((clientName.toString().split(" ").length - 1) !== 1) {
+		  if  (clientName.toString().indexOf(' ') >= 0) {
             formData['$first_name'] = data['name'];
           }else{
            formData['$first_name'] = clientName[0];
            formData['$last_name'] = clientName[1];
           }
+		}
          
           var customFields = [];
           Object.keys(data).forEach(key => {
@@ -895,9 +904,13 @@ Input Mask 6.0.7
             }
             customFields.push(key);
           });
-          
-	  formData['Current Member'] = 'No';
-          formData['$source'] = "Put Gang Meeting";
+          if(memberEmail) {
+			formData['Current Member'] = true;
+			formData['$source'] = "Onboarding";
+		  }else{
+	      formData['Current Member'] = false;
+          formData['$source'] = "Meeting";
+		  }
           
           console.log(formData); console.log('new success');
 		
@@ -922,6 +935,78 @@ Input Mask 6.0.7
 }
 
 
+
+FForm.prototype._onCCAdd = async function (data) {
+     
+	var t = "eyJraWQiOiJqMC03R1Nub1FRZVZPcDBWUENCNnljYWNXOWNBMExNWGlFdWU0QnA4czdVIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkxFXy01M2NNSlJocktyaklkX1I2WWJ1eWpSRHpEY3BkdEJ6eEVjYXdIRVEub2FyeTdqNTNxYWZ0QlF2Qk0waDYiLCJpc3MiOiJodHRwczovL2lkZW50aXR5LmNvbnN0YW50Y29udGFjdC5jb20vb2F1dGgyL2F1czFsbTNyeTltRjd4MkphMGg4IiwiYXVkIjoiaHR0cHM6Ly9hcGkuY2MuZW1haWwvdjMiLCJpYXQiOjE2ODI4MDE2NjIsImV4cCI6MTY4Mjg4ODA2MiwiY2lkIjoiMTQyNGJjYjUtNmRlNS00MTcwLWJkZTgtN2UyMTA2NzZkOWM0IiwidWlkIjoiMDB1MXJ5Znk0OHJFVjY3bkYwaDgiLCJzY3AiOlsib2ZmbGluZV9hY2Nlc3MiLCJjb250YWN0X2RhdGEiXSwiYXV0aF90aW1lIjoxNjgyODAwMzE5LCJzdWIiOiJzdXBwb3J0QHB1dGdhbmcuY29tIiwicGxhdGZvcm1fdXNlcl9pZCI6IjM0YTJmODM4LTJiNjAtNGNkNy04NjU4LTU2MjBmNjJlNDAwNSJ9.T54MDf7Q7G1uQPzsfkhOyeqVipgVmn-G5zaJEzt2JugaeS33KyRAzl3qV8xcfMw2L47IuKdIb1mgmcztm_gbw5L4QoVY12mn9Z3EGDh29gIS0W01EhIe_5mUecC3uy99D6waxodloLfCcuPAMmx_HiiIb7CLhBDLQqkC-ipl7B00NsgVnX-yK7WZPFN-4S4K_dqYFdCWXWAj1AoFa_TGHPWrT5TNVdWEkPG0iAOx69KtW2fJrzQ1ebv13I2yknGP9Mdq38NJoJqZl5VdFOKvSfsRdKIN-m8s7LYcLE2yGsFtP429ib083jAOvqVtn9L4TZ5hT06EvjQm7MDhgQJUSQ";
+
+	var formData = {};
+    var $email_address = {"address": data['email'], "permission_to_send": "implicit"};
+	var $phone_number = [{"phone_number": '+1' + data['phone'].replace(/[^A-Z0-9]/ig, '-').replace('--','-'), "kind": "home"}];
+
+	formData['email_address'] = $email_address;
+	formData['phone_numbers'] = $phone_number;
+	
+	//add name or split
+	var clientName = data['name'].split(" ");
+	if  (clientName.toString().indexOf(' ') >= 0) {
+	  formData['first_name'] = data['name'];
+	}else{
+	 formData['first_name'] = clientName[0];
+	 formData['last_name'] = clientName[1];
+	}
+   
+	
+	var customFields = [];
+	Object.keys(data).forEach(key => {
+		if(key.includes('email') || key.includes('name') || key.includes('phone')) return;
+	  if(Array.isArray(data[key])) {
+		customFields[key] = data[key].toString(); 
+	  }else{
+		switch(key) {
+			case 'Available for Live trading':
+				customFields.push({'custom_field_id':'404c6bf0-e6d7-11ed-bf7d-fa163e6a92d8', 'value': data[key]}); 
+			  break;
+			case 'Do you have 10k':
+				customFields.push({'custom_field_id':'4c7893e0-e6d7-11ed-9025-fa163e0f14ae', 'value': data[key]}); 
+			  break;
+			case 'Do you want funding':
+				customFields.push({'custom_field_id':'53262cb6-e6d7-11ed-8554-fa163ef3b06c', 'value': data[key]}); 
+			break;
+			case 'Trading goals':
+				customFields.push({'custom_field_id':'5ab9863a-e6d7-11ed-b9a9-fa163eec71c4', 'value': data[key]}); 
+			break;
+			default:
+				customFields.push({key: data[key]}); 
+		  }  
+	  }
+	});
+	
+	//current member
+	customFields.push({'custom_field_id':'4819e77c-e6d7-11ed-bf7d-fa163e6a92d8', 'value': 'No'}); 
+	// add all custom fields
+	formData['custom_fields'] = customFields;
+	formData['create_source'] = 'Contact';
+	formData['list_memberships'] = ['85f77040-e453-11ed-9a5b-fa163e0f14ae'];
+	console.log(formData); 
+  
+
+const options = {
+method: 'POST',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + t
+},
+body: JSON.stringify(formData)
+};	
+  
+	
+   fetch('https://api.cc.email/v3/contacts', options)
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(err => console.error(err.message));
+
+}
 
 
 
